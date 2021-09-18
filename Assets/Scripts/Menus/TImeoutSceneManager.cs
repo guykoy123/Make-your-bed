@@ -22,6 +22,7 @@ public class TImeoutSceneManager : MonoBehaviour
             breakdownString += key + ": " + breakdown[key] + "%\r\n";
         }
         breakdownText.text = breakdownString;
+        breakdownPanel.SetActive(false);
     }
 
     // Update is called once per frame

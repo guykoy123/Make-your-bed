@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 9dc16c445787d3c4ca4bbab102f72426
+  - enabled: 1
     path: Assets/Scenes/test scene.unity
     guid: e48b799de221278418abed9e651c0a17
   - enabled: 1
     path: Assets/Scenes/timeout scene.unity
     guid: 553a2bacd9fbce94ea24f57381593310
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
-    guid: 9dc16c445787d3c4ca4bbab102f72426
+    path: Assets/Scenes/pause menu.unity
+    guid: 142a0ba90841a074586528161dcbad8b
   m_configObjects: {}

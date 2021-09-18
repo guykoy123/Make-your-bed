@@ -10,7 +10,7 @@ public class DoorController : MonoBehaviour
     void Start()
     {
         
-        transform.Rotate(axis, 90f);
+        //transform.Rotate(axis, 90f);
     }
 
     // Update is called once per frame
@@ -18,4 +18,5 @@ public class DoorController : MonoBehaviour
     {
         
     }
+
 }

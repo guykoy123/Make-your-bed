@@ -56,16 +56,21 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Menus\PauseMenuManager.cs" />
+    <Compile Include="Assets\Scripts\OptionsData.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAction.cs" />
-    <Compile Include="Assets\Scripts\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\Menus\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Environment\PositionCheck.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Game\Timer.cs" />
-    <Compile Include="Assets\Scripts\TImeoutSceneManager.cs" />
+    <Compile Include="Assets\Scripts\Menus\TImeoutSceneManager.cs" />
+    <Compile Include="Assets\Scripts\Environment\ItemAudioPlayer.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Game\ScoreCalculator.cs" />
     <Compile Include="Assets\Scripts\Game\FloorController.cs" />
     <Compile Include="Assets\Scripts\Environment\DrawerController.cs" />
+    <Compile Include="Assets\Scripts\Environment\LevelManager.cs" />
+    <Compile Include="Assets\Scripts\VolumeSliderController.cs" />
     <Compile Include="Assets\Scripts\Environment\DoorController.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -29,14 +29,7 @@ public class MenuManager : MonoBehaviour
     public void exitPress()
     {
         Debug.Log("closing game");
-        if (UnityEditor.EditorApplication.isPlaying)
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-        else
-        {
-            Application.Quit();
-        }
+        Application.Quit();
         
     }
 

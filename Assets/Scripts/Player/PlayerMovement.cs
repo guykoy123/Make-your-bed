@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     public Transform CameraTransform;
     public Timer gameTimer;
+    public GameManager gameManager;
 
     public float speed = 10f;
     public float gravity = -10f;
@@ -28,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameTimer.gotTime())
+        if (gameTimer.gotTime() && !gameManager.isPaused())
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

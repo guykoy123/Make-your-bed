@@ -7,6 +7,7 @@ public class PlayerAction : MonoBehaviour
     public Transform playerCam;
     public Rigidbody holdPosition;
     public Timer gameTimer;
+    public GameManager gameManager;
 
     CharacterJoint joint;
     GameObject item;
@@ -19,9 +20,21 @@ public class PlayerAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (gameManager.isPaused())
+            {
+                gameManager.Unpause();
+            }
+            else
+            {
+                gameManager.pauseGame();
+            }
+           
+        }
         
-        
-        if (Input.GetMouseButtonDown(0) && gameTimer.gotTime())
+        if (Input.GetMouseButtonDown(0) && gameTimer.gotTime() && !gameManager.isPaused())
         {
             RaycastHit hit;
             Physics.Raycast(playerCam.position, playerCam.TransformVector(Vector3.forward), out hit, 5f);
@@ -61,7 +74,7 @@ public class PlayerAction : MonoBehaviour
             }
             
         }
-        else if (Input.GetMouseButtonUp(0) && gameTimer.gotTime())
+        else if (Input.GetMouseButtonUp(0) && gameTimer.gotTime() && !gameManager.isPaused())
         {
             if (joint != null)
             {
@@ -72,7 +85,7 @@ public class PlayerAction : MonoBehaviour
             }
             
         }
-        else if(joint != null && !Input.GetMouseButton(0) && gameTimer.gotTime())
+        else if(joint != null && !Input.GetMouseButton(0) && gameTimer.gotTime() && !gameManager.isPaused())
         {
             Destroy(joint);
         }

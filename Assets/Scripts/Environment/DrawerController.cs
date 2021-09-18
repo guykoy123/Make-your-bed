@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class DrawerController : MonoBehaviour
 {
+    AudioSource audioSource;
+
     bool open = false;
     Vector3 Move = new Vector3(-1f, 0, 0);
     Vector3 basePosition;
     Vector3 openPosition;
     float moveSpeed = 0.01f;
     Dictionary<Collider, Vector3> objectScales = new Dictionary<Collider, Vector3>();
+
     private void Start()
     {
         basePosition = transform.localPosition;
         openPosition = transform.localPosition + new Vector3(-0.007f,0,0);
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.volume = OptionsData.masterVolume;
     }
     void Update()
     {
@@ -31,6 +36,7 @@ public class DrawerController : MonoBehaviour
     }
     public void ToggleDrawer()
     {
+        audioSource.Play();
         if (open) { open = false; }
         else { open = true; }
     }
