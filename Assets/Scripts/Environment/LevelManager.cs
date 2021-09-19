@@ -12,7 +12,12 @@ public class LevelManager : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.name + " is out of bounds");
-        other.transform.position = spawnPoint.position;
+        
+        if(other.tag != "Player")
+        {
+            Debug.Log(other.name + " is out of bounds");
+            other.transform.position = spawnPoint.position;
+        }
+        
     }
 }

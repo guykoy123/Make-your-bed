@@ -6,7 +6,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public float remainingTime = 150;
+    public float remainingTime = 120;
     TMP_Text clockText;
     public GameManager gameManager;
     bool timeout = false;

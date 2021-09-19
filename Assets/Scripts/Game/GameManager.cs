@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         scoreCalculator = gameObject.GetComponent<ScoreCalculator>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -27,12 +28,14 @@ public class GameManager : MonoBehaviour
     {
         float score = scoreCalculator.CalculateTotal();
         Debug.Log("ran out of time, score:" + score);
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("timeout scene", LoadSceneMode.Additive);
     }
     public void pauseGame()
     {
 
         paused = true;
+        Cursor.lockState = CursorLockMode.Confined;
         SceneManager.LoadScene("pause menu", LoadSceneMode.Additive);
     }
 
@@ -40,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         paused = false;
         SceneManager.UnloadSceneAsync("pause menu");
-
+        Cursor.lockState = CursorLockMode.Locked;
         ItemAudioPlayer[] itemAudio = FindObjectsOfType<ItemAudioPlayer>();
         foreach (ItemAudioPlayer item in itemAudio)
         {

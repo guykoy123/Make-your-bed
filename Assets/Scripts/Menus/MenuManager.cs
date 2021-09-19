@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     // Update is called once per frame
