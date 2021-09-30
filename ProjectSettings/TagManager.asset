@@ -8,6 +8,7 @@ TagManager:
   - ItemArea
   - Drawer
   - Door
+  - Interact
   layers:
   - Default
   - TransparentFX

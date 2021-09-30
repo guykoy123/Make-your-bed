@@ -8,6 +8,7 @@ public class PlayerAction : MonoBehaviour
     public Rigidbody holdPosition;
     public Timer gameTimer;
     public GameManager gameManager;
+    public GameObject interactMessage;
 
     CharacterJoint joint;
     GameObject item;
@@ -75,7 +76,43 @@ public class PlayerAction : MonoBehaviour
         {
             Destroy(joint);
         }
-        
+
+        RaycastHit hit2;
+        Physics.Raycast(playerCam.position, playerCam.TransformVector(Vector3.forward), out hit2, 3f);
+        if(hit2.collider != null)
+        {
+            if (hit2.collider.tag == "Interact")
+            {
+                interactMessage.SetActive(true);
+                if (Input.GetButtonDown("Interact"))
+                {
+                    hit2.collider.GetComponent<TrashcanController>().TakeoutTrash();
+                }
+            }
+
+            else if(hit2.collider.tag == "Object")
+            {
+                TrashbagController t;
+                hit2.collider.TryGetComponent<TrashbagController>(out t);
+                if (t)
+                {
+                    if (Input.GetButtonDown("Interact"))
+                    {
+                        hit2.collider.GetComponent<TrashbagController>().DestroyBag();
+                    }
+                    interactMessage.SetActive(true);
+                }
+                
+
+            }
+
+            else
+            {
+                interactMessage.SetActive(false);
+            }
+        }
+
+
     }
 
     void HoldObject(RaycastHit hit)
@@ -88,7 +125,6 @@ public class PlayerAction : MonoBehaviour
         //get anchor position from position the player clicked on the object
         Vector3 anchorPosition = item.transform.InverseTransformPoint(hit.point);
 
-        Debug.Log("hold position:" + hit.point);
         //maintains the distance of the object from the player
         holdPosition.transform.position = hit.point;
 
