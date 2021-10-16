@@ -22,25 +22,72 @@ public class PlayerAction : MonoBehaviour
     void Update()
     {
         //check if player press escape key (independent of pausing)
-        if (Input.GetButtonDown("Cancel") && gameTimer.gotTime())
+        CheckPause();
+
+        //check mouse click while game is active
+        CheckMouseClick();
+
+        //check if interactable objectss
+        CheckInteractable();
+    }
+
+    void CheckInteractable()
+    {
+        RaycastHit hit2;
+        Physics.Raycast(playerCam.position, playerCam.TransformVector(Vector3.forward), out hit2, 3f);
+        if (hit2.collider != null)
         {
-            if (gameManager.isPaused())
+            //check game object has interactable tag
+            if (hit2.collider.tag == "Interact")
             {
-                gameManager.Unpause();
+                //show interact message (press e)
+                interactMessage.SetActive(true);
+                //check if e button is pressed
+                if (Input.GetButtonDown("Interact"))
+                {
+                    //TODO: will be more orgenized when more interavtable stuff is added
+                    hit2.collider.GetComponent<TrashcanController>().TakeoutTrash();
+                }
             }
+
+            //check for trash bag
+            else if (hit2.collider.tag == "Object")
+            {
+                TrashbagController t;
+                hit2.collider.TryGetComponent<TrashbagController>(out t);
+                if (t)
+                {
+                    interactMessage.SetActive(true);
+                    if (Input.GetButtonDown("Interact"))
+                    {
+                        hit2.collider.GetComponent<TrashbagController>().DestroyBag();
+                        Destroy(hit2.collider.gameObject);
+                        interactMessage.SetActive(false);
+                    }
+                    
+                }
+
+
+            }
+
             else
             {
-                gameManager.pauseGame();
+                interactMessage.SetActive(false);
             }
-           
         }
-        //check mouse click while game is active
+        else
+        {
+            interactMessage.SetActive(false);
+        }
+    }
+    void CheckMouseClick()
+    {
         if (Input.GetMouseButtonDown(0) && gameTimer.gotTime() && !gameManager.isPaused())
         {
             //send ray and act based on the object hit
             RaycastHit hit;
             Physics.Raycast(playerCam.position, playerCam.TransformVector(Vector3.forward), out hit, 5f);
-            if(hit.collider != null)
+            if (hit.collider != null)
             {
                 if (hit.collider.tag == "Object")
                 {
@@ -51,7 +98,7 @@ public class PlayerAction : MonoBehaviour
                     DrawerController drawer = hit.collider.GetComponent<DrawerController>();
                     drawer.ToggleDrawer();
                 }
-                else if(hit.collider.tag == "Door")
+                else if (hit.collider.tag == "Door")
                 {
                     hit.collider.GetComponent<DoorController>().toggleDoor();
                 }
@@ -60,7 +107,7 @@ public class PlayerAction : MonoBehaviour
                     Debug.Log("hit: " + hit.collider.name);
                 }
             }
-            
+
         }
         //clear the joint created for holding the object on mouse button release
         else if (Input.GetMouseButtonUp(0) && gameTimer.gotTime() && !gameManager.isPaused())
@@ -69,52 +116,30 @@ public class PlayerAction : MonoBehaviour
             {
                 Destroy(joint);
             }
-            
+
         }
         //if button is not pressed and joint is not null, clear it
-        else if(joint != null && !Input.GetMouseButton(0) && gameTimer.gotTime() && !gameManager.isPaused())
+        else if (joint != null && !Input.GetMouseButton(0) && gameTimer.gotTime() && !gameManager.isPaused())
         {
             Destroy(joint);
         }
-
-        RaycastHit hit2;
-        Physics.Raycast(playerCam.position, playerCam.TransformVector(Vector3.forward), out hit2, 3f);
-        if(hit2.collider != null)
-        {
-            if (hit2.collider.tag == "Interact")
-            {
-                interactMessage.SetActive(true);
-                if (Input.GetButtonDown("Interact"))
-                {
-                    hit2.collider.GetComponent<TrashcanController>().TakeoutTrash();
-                }
-            }
-
-            else if(hit2.collider.tag == "Object")
-            {
-                TrashbagController t;
-                hit2.collider.TryGetComponent<TrashbagController>(out t);
-                if (t)
-                {
-                    if (Input.GetButtonDown("Interact"))
-                    {
-                        hit2.collider.GetComponent<TrashbagController>().DestroyBag();
-                    }
-                    interactMessage.SetActive(true);
-                }
-                
-
-            }
-
-            else
-            {
-                interactMessage.SetActive(false);
-            }
-        }
-
-
     }
 
+    void CheckPause()
+    {
+        if (Input.GetButtonDown("Cancel") && gameTimer.gotTime())
+        {
+            if (gameManager.isPaused())
+            {
+                gameManager.Unpause();
+            }
+            else
+            {
+                gameManager.pauseGame();
+            }
+
+        }
+    }
     void HoldObject(RaycastHit hit)
     {
         //get game object and add charachter joint to it

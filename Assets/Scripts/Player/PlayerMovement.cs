@@ -29,24 +29,32 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //while game is not paused
         if (gameTimer.gotTime() && !gameManager.isPaused())
         {
+            //get mouse movement
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+            //clamp the upwards rotation
             xRotation -= mouseY;
             xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
+            //rotate the camera up and down
             CameraTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+            //rotate player
             transform.Rotate(Vector3.up * mouseX);
 
+            //get movement input
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
+            //calculate movement
             Vector3 direction = (transform.right * horizontal + transform.forward * vertical) * speed;
 
+            //checl jumping
             if(isGrounded && Input.GetButtonDown("Jump"))
             {
-                upSpeed += jumpForce;
+                upSpeed = jumpForce;
             }
             else if (!isGrounded)
             {
@@ -55,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
 
             Vector3 movement = direction * Time.deltaTime;
             movement.y += upSpeed * Time.deltaTime;
-
+            //move player
             controller.Move(movement);
             isGrounded = controller.isGrounded; //because controller.isGrounded is updated after using the move method
         }  

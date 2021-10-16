@@ -23,11 +23,13 @@ public class DoorController : MonoBehaviour
     {
         if (open)
         {
+            //close door
             transform.Rotate(axis, 90f);
             open = false;
         }
         else
         {
+            //open door
             open = true;
             transform.Rotate(axis, -90f);
         }
