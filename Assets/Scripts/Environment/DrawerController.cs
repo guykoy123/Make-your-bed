@@ -35,24 +35,14 @@ public class DrawerController : MonoBehaviour
         
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.volume = OptionsData.masterVolume;
+
     }
     void Update()
     {
+        Debug.Log(open);
         if (open)
         {
             //slide the drawer
-            if (SwitchAxis)
-            {
-                transform.localPosition = transform.localPosition + new Vector3( 0, Time.deltaTime * moveSpeed * Direction, 0);
-            }
-            else
-            {
-                transform.localPosition = transform.localPosition + new Vector3(Time.deltaTime * moveSpeed * Direction, 0, 0);
-            }
-        }
-        else
-        {
-            // slide the drawer
             if (SwitchAxis)
             {
                 transform.localPosition = transform.localPosition - new Vector3( 0, Time.deltaTime * moveSpeed * Direction, 0);
@@ -60,6 +50,18 @@ public class DrawerController : MonoBehaviour
             else
             {
                 transform.localPosition = transform.localPosition - new Vector3(Time.deltaTime * moveSpeed * Direction, 0, 0);
+            }
+        }
+        else
+        {
+            // slide the drawer
+            if (SwitchAxis)
+            {
+                transform.localPosition = transform.localPosition + new Vector3( 0, Time.deltaTime * moveSpeed * Direction, 0);
+            }
+            else
+            {
+                transform.localPosition = transform.localPosition + new Vector3(Time.deltaTime * moveSpeed * Direction, 0, 0);
             }
         }
         transform.localPosition=new Vector3(Mathf.Clamp(transform.localPosition.x, openPosition.x, basePosition.x), Mathf.Clamp(transform.localPosition.y, openPosition.y, basePosition.y), basePosition.z);
