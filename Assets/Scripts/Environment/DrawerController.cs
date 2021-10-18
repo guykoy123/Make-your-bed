@@ -39,7 +39,6 @@ public class DrawerController : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(open);
         if (open)
         {
             //slide the drawer
