@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     public CharacterController controller;
     public Transform CameraTransform;
     public Timer gameTimer;
     public GameManager gameManager;
+    public Animator playerAnimator;
 
-    public float speed = 10f;
+    //Movement speeds
+    float WalkSpeed = 5f;
+    float SprintSpeed = 9f;
+    float CrouchSpeed = 3f;
+    float ProneSpeed = 1.5f;
+
     public float gravity = -10f;
     public float mouseSensitivity = 300f;
     public float jumpForce = 7f;
@@ -17,13 +24,15 @@ public class PlayerMovement : MonoBehaviour
     float upSpeed = 0;
     bool isGrounded=true;
     float xRotation = 0f;
-    
+    MovementType currentMoveType = MovementType.Walk;
+    float currentSpeed;
 
     // Start is called before the first frame update
     void Start()
     {
         controller.Move(new Vector3(0,0,0));
         isGrounded = controller.isGrounded;
+        currentSpeed = WalkSpeed;
     }
 
     // Update is called once per frame
@@ -32,24 +41,27 @@ public class PlayerMovement : MonoBehaviour
         //while game is not paused
         if (gameTimer.gotTime() && !gameManager.isPaused())
         {
-            //get mouse movement
-            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-            //clamp the upwards rotation
-            xRotation -= mouseY;
-            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            
+            PlayerCameraMove();
 
-            //rotate the camera up and down
-            CameraTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-            //rotate player
-            transform.Rotate(Vector3.up * mouseX);
+            CheckMovementType();
 
             //get movement input
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
 
             //calculate movement
-            Vector3 direction = (transform.right * horizontal + transform.forward * vertical) * speed;
+            Vector3 direction = (transform.right * horizontal + transform.forward * vertical) * currentSpeed;
+
+            //play walking animation
+            if (direction.sqrMagnitude > 0)
+            {
+                playerAnimator.SetBool("Walk", true);
+            }
+            else
+            {
+                playerAnimator.SetBool("Walk", false);
+            }
 
             //checl jumping
             if(isGrounded && Input.GetButtonDown("Jump"))
@@ -68,5 +80,68 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = controller.isGrounded; //because controller.isGrounded is updated after using the move method
         }  
         
+    }
+
+    void PlayerCameraMove()
+    {
+        //rotate the player camera up and down
+
+        //get mouse movement
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        //clamp the upwards rotation
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        //rotate the camera up and down
+        CameraTransform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+        //rotate player
+        transform.Rotate(Vector3.up * mouseX);
+
+    }
+    void CheckMovementType()
+    {
+        /*
+         * check if a movement type button is pressed down
+         * if yes triggers the movement animation and changes the player speed
+         * then checks if movement type button is released 
+         * if yes triggers animation and reverts to walking speed
+         */
+        if (Input.GetButtonDown("Sprint"))
+        {
+            playerAnimator.SetBool("Sprint", true);
+            currentSpeed = SprintSpeed;
+        }
+        else if (Input.GetButtonDown("Crouch"))
+        {
+            playerAnimator.SetTrigger("CrouchDown");
+            currentSpeed = CrouchSpeed;
+            playerAnimator.SetBool("Crouch", true);
+        }
+        else if (Input.GetButtonDown("Prone"))
+        {
+            playerAnimator.SetTrigger("ProneDown");
+            currentSpeed = ProneSpeed;
+            playerAnimator.SetBool("Prone", true);
+        }
+
+        if (Input.GetButtonUp("Crouch"))
+        {
+            playerAnimator.SetTrigger("CrouchUp");
+            currentSpeed = WalkSpeed;
+            playerAnimator.SetBool("Crouch", false);
+        }
+        else if (Input.GetButtonUp("Prone"))
+        {
+            playerAnimator.SetTrigger("ProneUp");
+            currentSpeed = WalkSpeed;
+            playerAnimator.SetBool("Prone", false);
+        }
+       else if (Input.GetButtonUp("Sprint"))
+        {
+            currentSpeed = WalkSpeed;
+            playerAnimator.SetBool("Sprint", false);
+        }
     }
 }
