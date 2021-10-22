@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     {
         scoreCalculator = gameObject.GetComponent<ScoreCalculator>();
         Cursor.lockState = CursorLockMode.Locked;
+        HideItemAreas();
     }
 
     // Update is called once per frame
@@ -53,6 +54,29 @@ public class GameManager : MonoBehaviour
     public bool isPaused()
     {
         return paused;
+    }
+
+    void HideItemAreas()
+    {
+        GameObject[] areas = GameObject.FindGameObjectsWithTag("ItemArea");
+        foreach (GameObject area in areas)
+        {
+            for(int i = 0; i < area.transform.childCount; i++)
+            {
+                area.transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
+    }
+    private void OnApplicationQuit()
+    {
+        GameObject[] areas = GameObject.FindGameObjectsWithTag("ItemArea");
+        foreach (GameObject area in areas)
+        {
+            for (int i = 0; i < area.transform.childCount; i++)
+            {
+                area.transform.GetChild(i).GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
     }
 }
 

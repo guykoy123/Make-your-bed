@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     float upSpeed = 0;
     bool isGrounded=true;
     float xRotation = 0f;
-    MovementType currentMoveType = MovementType.Walk;
     float currentSpeed;
 
     // Start is called before the first frame update
@@ -118,12 +117,16 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetTrigger("CrouchDown");
             currentSpeed = CrouchSpeed;
             playerAnimator.SetBool("Crouch", true);
+            controller.height = 1.6f;
+            controller.center = new Vector3(0, -0.1f, 0);
         }
         else if (Input.GetButtonDown("Prone"))
         {
             playerAnimator.SetTrigger("ProneDown");
             currentSpeed = ProneSpeed;
             playerAnimator.SetBool("Prone", true);
+            controller.height = 0.5f;
+            controller.center = new Vector3(0, -0.6f, 1.5f);
         }
 
         if (Input.GetButtonUp("Crouch"))
@@ -131,12 +134,16 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetTrigger("CrouchUp");
             currentSpeed = WalkSpeed;
             playerAnimator.SetBool("Crouch", false);
+            controller.height = 1.8f;
+            controller.center = new Vector3(0, 0, 0);
         }
         else if (Input.GetButtonUp("Prone"))
         {
             playerAnimator.SetTrigger("ProneUp");
             currentSpeed = WalkSpeed;
             playerAnimator.SetBool("Prone", false);
+            controller.height = 1.8f;
+            controller.center = new Vector3(0, 0, 0);
         }
        else if (Input.GetButtonUp("Sprint"))
         {

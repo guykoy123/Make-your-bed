@@ -63,11 +63,8 @@ public class PlayerAction : MonoBehaviour
                         hit2.collider.GetComponent<TrashbagController>().DestroyBag();
                         Destroy(hit2.collider.gameObject);
                         interactMessage.SetActive(false);
-                    }
-                    
+                    }  
                 }
-
-
             }
 
             else
