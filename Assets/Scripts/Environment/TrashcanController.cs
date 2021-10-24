@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class TrashcanController : MonoBehaviour
 {
+    public FloorController floorController;
+
     List<GameObject> Trash = new List<GameObject>();
     GameObject trashBagPrefab;
     Vector3 spawnPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +45,10 @@ public class TrashcanController : MonoBehaviour
         //bag.transform.position = spawnPosition;new Vector3(0,1,0)
         GameObject bag = Instantiate(trashBagPrefab,spawnPosition ,Quaternion.Euler(new Vector3(0,0,0)));
 
-       
+       foreach (GameObject item in Trash)
+       {
+            floorController.RemoveItemFromFloor(item.GetComponent<Collider>());//remove the item from the floor list
+       }
 
         //initialize the trash bag
         bag.GetComponent<TrashbagController>().createBag(Trash);

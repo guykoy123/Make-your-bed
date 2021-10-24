@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerAction : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class PlayerAction : MonoBehaviour
     public Rigidbody holdPosition;
     public Timer gameTimer;
     public GameManager gameManager;
-    public GameObject interactMessage;
+    public TMP_Text interactMessage;
 
     CharacterJoint joint;
     GameObject item;
@@ -41,7 +42,7 @@ public class PlayerAction : MonoBehaviour
             if (hit2.collider.tag == "Interact")
             {
                 //show interact message (press e)
-                interactMessage.SetActive(true);
+                interactMessage.text = "PRESS E TO TAKE OUT TRASH";      
                 //check if e button is pressed
                 if (Input.GetButtonDown("Interact"))
                 {
@@ -57,24 +58,29 @@ public class PlayerAction : MonoBehaviour
                 hit2.collider.TryGetComponent<TrashbagController>(out t);
                 if (t)
                 {
-                    interactMessage.SetActive(true);
+                    interactMessage.text = "PRESS E TO DESTROY TRASHBAG";
                     if (Input.GetButtonDown("Interact"))
                     {
                         hit2.collider.GetComponent<TrashbagController>().DestroyBag();
                         Destroy(hit2.collider.gameObject);
-                        interactMessage.SetActive(false);
+                        interactMessage.text = "";
                     }  
                 }
             }
 
+            else if(hit2.collider.tag == "Dust Spot")
+            {
+                interactMessage.text = "PRESS E TO CLEAN DUST";
+            }
+
             else
             {
-                interactMessage.SetActive(false);
+                interactMessage.text="";
             }
         }
         else
         {
-            interactMessage.SetActive(false);
+            interactMessage.text="";
         }
     }
     void CheckMouseClick()

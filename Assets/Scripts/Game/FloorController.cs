@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FloorController : MonoBehaviour
 {
-    List<GameObject> items=new List<GameObject>();
+    List<Collider> items=new List<Collider>();
     // Start is called before the first frame update
     void Start()
     {
@@ -18,15 +18,36 @@ public class FloorController : MonoBehaviour
     }
     public int GetItemsOnFloor()
     {
-        //TODO: implement not counting items in proper position
-        return items.Count;
+        //remove duplicates from collider list
+        string OnFloor = "On the floor: ";
+        List<string> itemNames = new List<string>();
+        for(int i = 0; i < items.Count; i++)
+        {
+            if (!itemNames.Contains(items[i].name))
+            {
+                itemNames.Add(items[i].name);
+                OnFloor += items[i].name + ", ";
+            }
+        }
+        Debug.Log(OnFloor);
+        return itemNames.Count;
     }
-
+    public void RemoveItemFromFloor(Collider item)
+    {
+        if (items.Contains(item))
+        {
+            items.Remove(item);
+            Debug.Log("removed item from floor: " + item.name);
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Object")
         {
-            items.Add(other.gameObject);
+            if (!items.Contains(other))
+            {
+                items.Add(other);
+            }
         }
     }
 
@@ -34,7 +55,10 @@ public class FloorController : MonoBehaviour
     {
         if(other.tag== "Object")
         {
-            items.Remove(other.gameObject);
+            if (items.Contains(other))
+            {
+                items.Remove(other);
+            }
         }
     }
 }

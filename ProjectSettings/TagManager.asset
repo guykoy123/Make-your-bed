@@ -9,6 +9,7 @@ TagManager:
   - Drawer
   - Door
   - Interact
+  - Dust Spot
   layers:
   - Default
   - TransparentFX
