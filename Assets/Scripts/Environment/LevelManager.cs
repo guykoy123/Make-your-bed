@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
         if(other.tag != "Player")
         {
             Debug.Log(other.name + " is out of bounds");
-            other.transform.position = spawnPoint.position;
+            other.GetComponent<Rigidbody>().position = spawnPoint.position;
         }
         
     }
