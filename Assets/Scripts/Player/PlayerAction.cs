@@ -103,7 +103,7 @@ public class PlayerAction : MonoBehaviour
                 }
                 else if (hit.collider.tag == "Door")
                 {
-                    hit.collider.GetComponent<DoorController>().toggleDoor();
+                    hit.collider.GetComponent<DoorController>().toggleDoor(false);
                 }
                 else
                 {

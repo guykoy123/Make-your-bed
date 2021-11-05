@@ -15,15 +15,16 @@ public class PathController : MonoBehaviour
     float minimumDistance;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
         Transform[] temp = gameObject.GetComponentsInChildren<Transform>();
         //make waypoints invisible and create waypoint list
         for (int i = 1; i < temp.Length; i++) //start from one because first object is path
         {
-            Waypoints[i].GetComponent<MeshRenderer>().enabled = false;
             Waypoints.Add(temp[i]);
+            Waypoints[i-1].GetComponent<MeshRenderer>().enabled = false;
+            
         }
         Debug.Log(" waypoints-" + (Waypoints.Count));
     }

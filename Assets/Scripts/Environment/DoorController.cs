@@ -32,9 +32,9 @@ public class DoorController : MonoBehaviour
     {
         return open;
     }
-    public void toggleDoor()
+    public void toggleDoor(bool force)
     {
-        if (!Locked)
+        if (!Locked || force)
         {
             if (ClosetDoor)
             {

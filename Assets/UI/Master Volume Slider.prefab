@@ -516,7 +516,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 260347836938193177}
   m_HandleRect: {fileID: 260347836970432372}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -526,7 +526,7 @@ MonoBehaviour:
       - m_Target: {fileID: 260347837110326164}
         m_TargetAssemblyTypeName: VolumeSliderController, Assembly-CSharp
         m_MethodName: updateMasterVolume
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

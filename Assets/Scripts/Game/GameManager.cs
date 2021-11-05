@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
+    public GameObject playerCam;
+    public GameObject endCam;
     ScoreCalculator scoreCalculator;
     public Timer gameTimer;
     public Text currentScoreText;
@@ -14,6 +15,10 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //make sure player camera is enabled
+        playerCam.SetActive(true);
+        endCam.SetActive(false);
+
         scoreCalculator = gameObject.GetComponent<ScoreCalculator>();
         Cursor.lockState = CursorLockMode.Locked;
         HideItemAreas();
@@ -27,6 +32,10 @@ public class GameManager : MonoBehaviour
 
     public void TimeOut()
     {
+        //switch to end camera which shows the room
+        playerCam.SetActive(false);
+        endCam.SetActive(true);
+
         float score = scoreCalculator.CalculateTotal();
         Debug.Log("ran out of time, score:" + score);
         Cursor.lockState = CursorLockMode.Confined;
@@ -45,11 +54,6 @@ public class GameManager : MonoBehaviour
         paused = false;
         SceneManager.UnloadSceneAsync("pause menu");
         Cursor.lockState = CursorLockMode.Locked;
-        ItemAudioPlayer[] itemAudio = FindObjectsOfType<ItemAudioPlayer>();
-        foreach (ItemAudioPlayer item in itemAudio)
-        {
-            item.UpdateVolume();
-        }
     }
     public bool isPaused()
     {
