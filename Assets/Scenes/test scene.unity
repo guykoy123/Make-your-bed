@@ -3908,7 +3908,7 @@ AudioSource:
   m_GameObject: {fileID: 737452882}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 178179110939905560, guid: d22c0c9c590f5a24f8ec37143520676a, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4872dd8b6c6b34841870ecb33d406b7b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -11630,14 +11630,6 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4548008249616432466, guid: a1773a1e6899fd84b9ec17cdb5afd50e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 82.756996
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548008249616432466, guid: a1773a1e6899fd84b9ec17cdb5afd50e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 82.756996
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548008249616432466, guid: a1773a1e6899fd84b9ec17cdb5afd50e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.069001
       objectReference: {fileID: 0}
@@ -12063,14 +12055,6 @@ PrefabInstance:
     - target: {fileID: 2088936642795114477, guid: 2f3a0c0914ad38e49a76e74cbb24801c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997925855091807858, guid: 2f3a0c0914ad38e49a76e74cbb24801c, type: 3}
-      propertyPath: m_Drag
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 4997925855091807858, guid: 2f3a0c0914ad38e49a76e74cbb24801c, type: 3}
-      propertyPath: m_AngularDrag
-      value: 13.91
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f3a0c0914ad38e49a76e74cbb24801c, type: 3}
@@ -12651,6 +12635,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.00141
       objectReference: {fileID: 0}
+    - target: {fileID: 2017958193821128964, guid: 6fd5b830c85df4d44bb24b8bff0fc658, type: 3}
+      propertyPath: maxVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017958194681862084, guid: 6fd5b830c85df4d44bb24b8bff0fc658, type: 3}
+      propertyPath: maxVolume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2503488411351386288, guid: 6fd5b830c85df4d44bb24b8bff0fc658, type: 3}
+      propertyPath: maxVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2938258689466962261, guid: 6fd5b830c85df4d44bb24b8bff0fc658, type: 3}
       propertyPath: floorController
       value: 
@@ -12719,6 +12715,10 @@ PrefabInstance:
       propertyPath: OutputAudioMixerGroup
       value: 
       objectReference: {fileID: 178179110939905560, guid: d22c0c9c590f5a24f8ec37143520676a, type: 2}
+    - target: {fileID: 8134550963825896096, guid: 6fd5b830c85df4d44bb24b8bff0fc658, type: 3}
+      propertyPath: maxVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9154131185521410765, guid: 6fd5b830c85df4d44bb24b8bff0fc658, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0128
