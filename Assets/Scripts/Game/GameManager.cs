@@ -8,9 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public GameObject playerCam;
     public GameObject endCam;
-    ScoreCalculator scoreCalculator;
     public Timer gameTimer;
-    public Text currentScoreText;
+    public GameObject dustText;
+
+    ScoreCalculator scoreCalculator;
     bool paused = false;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
         playerCam.SetActive(true);
         endCam.SetActive(false);
 
+        dustText.SetActive(false);
         scoreCalculator = gameObject.GetComponent<ScoreCalculator>();
         Cursor.lockState = CursorLockMode.Locked;
         HideItemAreas();

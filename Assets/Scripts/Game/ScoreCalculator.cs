@@ -24,7 +24,20 @@ public class ScoreCalculator : MonoBehaviour
 
         //add score for clean floor
         totalPercent += Mathf.Max(100 - floor.GetItemsOnFloor() * 5,0);  //reduce 5 point for each object on the floor, is a non negative value
-        totalPercent = totalPercent / (ItemAreas.Length+1); //get the total percent by calculating average
+
+        //add score for cleaning dust spots
+        GameObject[] dustSpots = GameObject.FindGameObjectsWithTag("Dust Spot");
+        int cleanSpots = 0;
+        for (int i = 0; i < dustSpots.Length; i++)
+        {
+            if (dustSpots[i].GetComponent<DustSpotController>().isClean())
+            {
+                cleanSpots++;
+            }
+        }
+        totalPercent += cleanSpots / dustSpots.Length * 100;
+
+        totalPercent = totalPercent / (ItemAreas.Length+2); //get the total percent by calculating average
         return (float)Math.Round(totalPercent,2);
     }
 
@@ -42,6 +55,19 @@ public class ScoreCalculator : MonoBehaviour
 
         //calculate floor clean score
         scores.Add("Floor", Mathf.Max(100 - floor.GetItemsOnFloor() * 5, 0));
+
+        //add score for cleaning dust spots
+        GameObject[] dustSpots = GameObject.FindGameObjectsWithTag("Dust Spot");
+        int cleanSpots = 0;
+        for (int i = 0; i < dustSpots.Length; i++)
+        {
+            if (dustSpots[i].GetComponent<DustSpotController>().isClean())
+            {
+                cleanSpots++;
+            }
+        }
+        scores.Add("Dust", cleanSpots / dustSpots.Length * 100);
+
         return scores;
     }
 

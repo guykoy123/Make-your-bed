@@ -11,6 +11,8 @@ public class PlayerAction : MonoBehaviour
     public GameManager gameManager;
     public TMP_Text interactMessage;
 
+    bool disabledAction = false;
+    bool skipFrame = false;
     CharacterJoint joint;
     GameObject item;
     // Start is called before the first frame update
@@ -22,16 +24,38 @@ public class PlayerAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //check if player press escape key (independent of pausing)
-        CheckPause();
+        if (!disabledAction)
+        {
+            if (!skipFrame)
+            {
+                //check if player press escape key (independent of pausing)
+                CheckPause();
 
-        //check mouse click while game is active
-        CheckMouseClick();
+                //check mouse click while game is active
+                CheckMouseClick();
 
-        //check if interactable objectss
-        CheckInteractable();
+                //check if interactable objectss
+                CheckInteractable();
+            }
+            else
+            {
+                skipFrame = false;
+            }
+        }
     }
 
+    public void DisableAction()
+    {
+        disabledAction = true;
+    }
+    public void EnableAction()
+    {
+        disabledAction = false;
+    }
+    public void SkipFrame()
+    {
+        skipFrame = true;
+    }
     void CheckInteractable()
     {
         RaycastHit hit2;
@@ -70,7 +94,16 @@ public class PlayerAction : MonoBehaviour
 
             else if(hit2.collider.tag == "Dust Spot")
             {
-                interactMessage.text = "PRESS E TO CLEAN DUST";
+                DustSpotController spot = hit2.collider.GetComponent<DustSpotController>();
+                if (!spot.isCleaning())
+                {
+                    interactMessage.text = "PRESS E TO CLEAN DUST";
+                    if (Input.GetButtonDown("Interact"))
+                    {
+                        spot.EnterCleaningView();
+                        interactMessage.text = "PRESS E TO EXIT BACK";
+                    }
+                }
             }
 
             else

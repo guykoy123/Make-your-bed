@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     float xRotation = 0f;
     float currentSpeed;
 
+    bool movementDisabled = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //while game is not paused
-        if (gameTimer.gotTime() && !gameManager.isPaused())
+        if (gameTimer.gotTime() && !gameManager.isPaused() && !movementDisabled)
         {
             
             PlayerCameraMove();
@@ -81,6 +83,14 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    public void DisableMovement()
+    {
+        movementDisabled = true;
+    }
+    public void EnableMovement()
+    {
+        movementDisabled = false;
+    }
     void PlayerCameraMove()
     {
         //rotate the player camera up and down
