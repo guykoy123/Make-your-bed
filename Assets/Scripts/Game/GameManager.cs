@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         playerCam.SetActive(true);
         endCam.SetActive(false);
 
+        RandomizeDustSpots();
         dustText.SetActive(false);
         scoreCalculator = gameObject.GetComponent<ScoreCalculator>();
         Cursor.lockState = CursorLockMode.Locked;
@@ -32,6 +33,23 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void RandomizeDustSpots()
+    {
+        GameObject[] spots = GameObject.FindGameObjectsWithTag("Dust Spot");
+        int numOfSpots = Random.Range(1, spots.Length);
+        int disabled = 0;
+        while (disabled < numOfSpots)
+        {
+            int index = Random.Range(0, spots.Length);
+            if (spots[index].activeSelf)
+            {
+                spots[index].SetActive(false);
+                disabled++;
+            }
+        }
+        Debug.Log("spawned " + (spots.Length - numOfSpots) + "dust spots");
+
+    }
     public void TimeOut()
     {
         //switch to end camera which shows the room
