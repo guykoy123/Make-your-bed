@@ -17,15 +17,7 @@ public class PathController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
         Transform[] temp = gameObject.GetComponentsInChildren<Transform>();
-        //make waypoints invisible and create waypoint list
-        for (int i = 1; i < temp.Length; i++) //start from one because first object is path
-        {
-            Waypoints.Add(temp[i]);
-            Waypoints[i-1].GetComponent<MeshRenderer>().enabled = false;
-            
-        }
         Debug.Log(" waypoints-" + (Waypoints.Count));
     }
 

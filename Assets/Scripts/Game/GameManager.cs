@@ -11,11 +11,21 @@ public class GameManager : MonoBehaviour
     public Timer gameTimer;
     public GameObject dustText;
 
+    public bool endless = false; //switch to endless mode for debuging
+
     ScoreCalculator scoreCalculator;
     bool paused = false;
     // Start is called before the first frame update
     void Start()
     {
+        if (endless)
+        {
+            gameTimer.gameObject.SetActive(false);
+        }
+        else
+        {
+            gameTimer.gameObject.SetActive(true);
+        }
         //make sure player camera is enabled
         playerCam.SetActive(true);
         endCam.SetActive(false);
