@@ -18,6 +18,10 @@ public class PathController : MonoBehaviour
     void Awake()
     {
         Transform[] temp = gameObject.GetComponentsInChildren<Transform>();
+        for(int i = 1; i < temp.Length; i++)
+        {
+            Waypoints.Add(temp[i]);
+        }
         Debug.Log(" waypoints-" + (Waypoints.Count));
     }
 

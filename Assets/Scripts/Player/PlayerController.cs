@@ -8,13 +8,14 @@ public class PlayerController : MonoBehaviour
     public bool WakeUp = false;
     public AudioClip[] wakeUpSounds;
     public AudioSource playerAudio;
+    public AudioSource musicSource;
     public GameObject ObjectiveText;
     public CharacterController cc;
     public Animator eyesAnimator;
     public Animator playerAnimator;
 
     float objectiveTimer = 7;
-
+    bool startedMusic = false;
     private void Awake()
     {
         if (WakeUp)
@@ -56,6 +57,11 @@ public class PlayerController : MonoBehaviour
             else
             {
                 ObjectiveText.SetActive(false);
+                if (!startedMusic)
+                {
+                    musicSource.Play();
+                    startedMusic = true;
+                }
             }
         }
     }

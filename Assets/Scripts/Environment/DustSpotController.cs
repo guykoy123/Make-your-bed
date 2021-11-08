@@ -12,6 +12,7 @@ public class DustSpotController : MonoBehaviour
 
     Transform Sponge;
     GameObject dustCam;
+    AudioSource dustAudio;
 
     public float maxHP = 1;
     float currentHP;
@@ -20,11 +21,13 @@ public class DustSpotController : MonoBehaviour
     bool inCleaningMode = false;
     bool clean = false;
 
-    Vector3 previousMousePos;
+    Vector3 previousMousePos= Vector3.zero;
+    Vector3 previousMouseDirection = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
+        dustAudio = gameObject.GetComponent<AudioSource>();
         dustCam = transform.GetComponentInChildren<Camera>().gameObject;
         dustCam.SetActive(false);
         currentHP = maxHP;
@@ -54,6 +57,8 @@ public class DustSpotController : MonoBehaviour
         dustText.gameObject.SetActive(true);
 
         previousMousePos = Input.mousePosition;
+
+        dustAudio.Play();
     }
 
     public void ExitCleaningView()
@@ -75,6 +80,8 @@ public class DustSpotController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         dustText.gameObject.SetActive(false);
+
+        dustAudio.Pause();
     }
 
     public bool isClean()
@@ -111,6 +118,12 @@ public class DustSpotController : MonoBehaviour
                         {
                             if (previousMousePos != Input.mousePosition)
                             {
+                                /*Vector3 currentMouseDirection = Input.mousePosition - previousMousePos;
+                                if (Vector3.Angle(currentMouseDirection, previousMouseDirection)>150)
+                                {
+                                    dustAudio.Play();
+                                }
+                                previousMouseDirection = currentMouseDirection;*/
                                 previousMousePos = Input.mousePosition;
                                 currentHP -= cleaningSpeed * Time.deltaTime;
                                 dustText.text = Mathf.Round(Mathf.Max(currentHP / maxHP * 100, 0)).ToString() + "%";

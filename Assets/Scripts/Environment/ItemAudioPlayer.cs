@@ -5,7 +5,8 @@ using UnityEngine;
 public class ItemAudioPlayer : MonoBehaviour
 {
     AudioSource audioSource;
-
+    public AudioClip[] clips;
+    public bool playFromClips;
 
 
     // Start is called before the first frame update
@@ -23,6 +24,10 @@ public class ItemAudioPlayer : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        if (playFromClips)
+        {
+            audioSource.clip = clips[Random.Range(0, clips.Length)];
+        }
         audioSource.Play();
     }
 }
