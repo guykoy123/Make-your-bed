@@ -7,7 +7,8 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject optionsMenu;
-
+    public GameObject controlsMenu;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,5 +44,12 @@ public class MenuManager : MonoBehaviour
     {
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
+        controlsMenu.SetActive(false);
+    }
+
+    public void pressControls()
+    {
+        mainMenu.SetActive(false);
+        controlsMenu.SetActive(true);
     }
 }

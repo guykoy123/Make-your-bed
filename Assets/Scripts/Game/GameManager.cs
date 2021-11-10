@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
         dustText.SetActive(false);
         scoreCalculator = gameObject.GetComponent<ScoreCalculator>();
         Cursor.lockState = CursorLockMode.Locked;
-        HideItemAreas();
     }
 
     // Update is called once per frame
@@ -46,7 +45,7 @@ public class GameManager : MonoBehaviour
     void RandomizeDustSpots()
     {
         GameObject[] spots = GameObject.FindGameObjectsWithTag("Dust Spot");
-        int numOfSpots = Random.Range(1, spots.Length);
+        int numOfSpots = Random.Range(12, 17);
         int disabled = 0;
         while (disabled < numOfSpots)
         {
@@ -90,17 +89,6 @@ public class GameManager : MonoBehaviour
         return paused;
     }
 
-    void HideItemAreas()
-    {
-        GameObject[] areas = GameObject.FindGameObjectsWithTag("ItemArea");
-        foreach (GameObject area in areas)
-        {
-            for(int i = 0; i < area.transform.childCount; i++)
-            {
-                area.transform.GetChild(i).GetComponent<MeshRenderer>().enabled = false;
-            }
-        }
-    }
     private void OnApplicationQuit()
     {
         GameObject[] areas = GameObject.FindGameObjectsWithTag("ItemArea");

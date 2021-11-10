@@ -58,7 +58,7 @@ public class DustSpotController : MonoBehaviour
 
         previousMousePos = Input.mousePosition;
 
-        dustAudio.Play();
+        //dustAudio.Play();
     }
 
     public void ExitCleaningView()
@@ -81,7 +81,7 @@ public class DustSpotController : MonoBehaviour
 
         dustText.gameObject.SetActive(false);
 
-        dustAudio.Pause();
+        //dustAudio.Pause();
     }
 
     public bool isClean()
