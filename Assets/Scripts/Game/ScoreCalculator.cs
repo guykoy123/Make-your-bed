@@ -35,8 +35,9 @@ public class ScoreCalculator : MonoBehaviour
                 cleanSpots++;
             }
         }
-        totalPercent += cleanSpots / dustSpots.Length * 100;
-
+        float dustScore =(float)cleanSpots / (float)dustSpots.Length * 100;
+        totalPercent += dustScore;
+        Debug.Log("clean dust spot: " + cleanSpots + "total spots: " + dustSpots.Length+  "dust spot score: "+ dustScore);
         totalPercent = totalPercent / (ItemAreas.Length+2); //get the total percent by calculating average
         return (float)Math.Round(totalPercent,2);
     }
@@ -66,7 +67,7 @@ public class ScoreCalculator : MonoBehaviour
                 cleanSpots++;
             }
         }
-        scores.Add("Dust", cleanSpots / dustSpots.Length * 100);
+        scores.Add("Dust", (float)cleanSpots / (float)dustSpots.Length * 100);
 
         return scores;
     }

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject endCam;
     public Timer gameTimer;
     public GameObject dustText;
+    public GameObject playerUI;
 
     public bool endless = false; //switch to endless mode for debuging
 
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
         dustText.SetActive(false);
         scoreCalculator = gameObject.GetComponent<ScoreCalculator>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        playerUI.SetActive(true);
     }
 
     // Update is called once per frame
@@ -52,7 +55,7 @@ public class GameManager : MonoBehaviour
             int index = Random.Range(0, spots.Length);
             if (spots[index].activeSelf)
             {
-                spots[index].SetActive(false);
+                //spots[index].SetActive(false);
                 disabled++;
             }
         }
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
         float score = scoreCalculator.CalculateTotal();
         Debug.Log("ran out of time, score:" + score);
         Cursor.lockState = CursorLockMode.Confined;
+        playerUI.SetActive(false);
         SceneManager.LoadScene("timeout scene", LoadSceneMode.Additive);
     }
     public void pauseGame()

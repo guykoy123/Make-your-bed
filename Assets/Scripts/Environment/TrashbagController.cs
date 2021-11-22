@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class TrashbagController : MonoBehaviour
 {
-
+    FloorController floorController;
     List<GameObject> Trash = new List<GameObject>();
     GameObject poof;
     // Start is called before the first frame update
     void Start()
     {
+        floorController = GameObject.FindObjectOfType<FloorController>();
         GameObject trashbagPoof = Resources.Load<GameObject>("Trashbag Poof");
         poof = Instantiate(trashbagPoof, transform.position-new Vector3(0,0.3f,0),Quaternion.Euler(-90,0,0));
 
@@ -29,10 +30,18 @@ public class TrashbagController : MonoBehaviour
         //save the trash items list
         Trash = t;
         //disable the items and parent them to the trashbag
-        for(int i = 0; i < Trash.Count; i++)
+        for (int i = 0; i < Trash.Count; i++)
         {
-            Trash[i].SetActive(false);
+            //remove all object colliders (some objects have multipule colliders)
+            Collider[] itemCols = Trash[i].GetComponents<Collider>();
+            Debug.Log(Trash[i].name + " has " + itemCols.Length + "colliders");
+            foreach (Collider collider in itemCols)
+            {
+                Debug.Log("removing collider of " + collider.name);
+                floorController.RemoveItemFromFloor(collider);//remove the item from the floor list
+            }
             Trash[i].transform.parent = transform; //parent to the trash bag
+            Trash[i].SetActive(false);
         }
         
     }

@@ -39,6 +39,10 @@ public class FloorController : MonoBehaviour
             items.Remove(item);
             Debug.Log("removed item from floor: " + item.name);
         }
+        else
+        {
+            Debug.Log("no " + item.name + " collider on floor");
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -55,10 +59,7 @@ public class FloorController : MonoBehaviour
     {
         if(other.tag== "Object")
         {
-            if (items.Contains(other))
-            {
-                items.Remove(other);
-            }
+            RemoveItemFromFloor(other);
         }
     }
 }

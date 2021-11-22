@@ -18,7 +18,6 @@ public class PlayerMovement : MonoBehaviour
     float ProneSpeed = 1.5f;
 
     public float gravity = -10f;
-    public float mouseSensitivity = 300f;
     public float jumpForce = 7f;
 
     float upSpeed = 0;
@@ -96,8 +95,8 @@ public class PlayerMovement : MonoBehaviour
         //rotate the player camera up and down
 
         //get mouse movement
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * OptionsData.mouseSensetivity *300* Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * OptionsData.mouseSensetivity*300 * Time.deltaTime;
 
         //clamp the upwards rotation
         xRotation -= mouseY;

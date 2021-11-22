@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 1956388672303792753}
   m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: -0.08910406, y: 0.6899397, z: -1.0765934}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 50, y: 50, z: 50.00001}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6478536213147159724, guid: 45b795a980584bc48a9853cc1e62e6f4, type: 3}
+  - {fileID: 2100000, guid: c4cf6ff26199f3147a28e16fc932cb10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbfbfacb96603c44eaf5266a3e068168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorController: {fileID: 0}
 --- !u!82 &172196626
 AudioSource:
   m_ObjectHideFlags: 0
