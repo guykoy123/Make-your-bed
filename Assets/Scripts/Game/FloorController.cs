@@ -51,6 +51,7 @@ public class FloorController : MonoBehaviour
             if (!items.Contains(other))
             {
                 items.Add(other);
+                Debug.Log(other.name + " is on the floor");
             }
         }
     }

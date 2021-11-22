@@ -41,8 +41,6 @@ public class TrashcanController : MonoBehaviour
     public void TakeoutTrash()
     {
         //spawn the gameobject
-        //GameObject bag = Instantiate(trashBagPrefab);
-        //bag.transform.position = spawnPosition;new Vector3(0,1,0)
         GameObject bag = Instantiate(trashBagPrefab,spawnPosition ,Quaternion.Euler(new Vector3(0,0,0)));
 
         //initialize the trash bag

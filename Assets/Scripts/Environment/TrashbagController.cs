@@ -33,13 +33,6 @@ public class TrashbagController : MonoBehaviour
         for (int i = 0; i < Trash.Count; i++)
         {
             //remove all object colliders (some objects have multipule colliders)
-            Collider[] itemCols = Trash[i].GetComponents<Collider>();
-            Debug.Log(Trash[i].name + " has " + itemCols.Length + "colliders");
-            foreach (Collider collider in itemCols)
-            {
-                Debug.Log("removing collider of " + collider.name);
-                floorController.RemoveItemFromFloor(collider);//remove the item from the floor list
-            }
             Trash[i].transform.parent = transform; //parent to the trash bag
             Trash[i].SetActive(false);
         }
