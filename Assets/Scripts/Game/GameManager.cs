@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
             int index = Random.Range(0, spots.Length);
             if (spots[index].activeSelf)
             {
-                //spots[index].SetActive(false);
+                spots[index].SetActive(false);
                 disabled++;
             }
         }

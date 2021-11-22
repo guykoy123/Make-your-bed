@@ -13,6 +13,8 @@ public class DustSpotController : MonoBehaviour
     Transform Sponge;
     GameObject dustCam;
     AudioSource dustAudio;
+    GameObject particleSystem;
+    ParticleSystem dustCloud;
 
     public float maxHP = 1;
     float currentHP;
@@ -31,6 +33,9 @@ public class DustSpotController : MonoBehaviour
         dustCam = transform.GetComponentInChildren<Camera>().gameObject;
         dustCam.SetActive(false);
         currentHP = maxHP;
+        particleSystem = Resources.Load<GameObject>("Dust Cleaning particles");
+
+
     }
     public bool isCleaning()
     {
@@ -53,6 +58,11 @@ public class DustSpotController : MonoBehaviour
 
         GameObject SpongePrefab = Resources.Load<GameObject>("sponge");
         Sponge = Instantiate(SpongePrefab).transform;
+
+        dustCloud = Instantiate<GameObject>(particleSystem).GetComponent<ParticleSystem>();
+        dustCloud.Pause();
+        dustCloud.transform.parent = Sponge.transform;
+        dustCloud.transform.localPosition = Vector3.zero;
 
         dustText.gameObject.SetActive(true);
 
@@ -80,6 +90,8 @@ public class DustSpotController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         dustText.gameObject.SetActive(false);
+
+        dustCloud.Pause();
 
         //dustAudio.Pause();
     }
@@ -127,6 +139,14 @@ public class DustSpotController : MonoBehaviour
                                 previousMousePos = Input.mousePosition;
                                 currentHP -= cleaningSpeed * Time.deltaTime;
                                 dustText.text = Mathf.Round(Mathf.Max(currentHP / maxHP * 100, 0)).ToString() + "%";
+                                if (!dustCloud.isEmitting)
+                                {
+                                    dustCloud.Play();
+                                }
+                            }
+                            else
+                            {
+                                dustCloud.Stop();
                             }
 
                         }
@@ -136,6 +156,14 @@ public class DustSpotController : MonoBehaviour
                             gameObject.GetComponent<MeshCollider>().enabled = false;
                             clean = true;
                         }
+                        else
+                        {
+                            dustCloud.Stop();
+                        }
+                    }
+                    else
+                    {
+                        dustCloud.Stop();
                     }
                 }
 
