@@ -26,7 +26,7 @@ public class Timer : MonoBehaviour
             clockText.text = "Time Left: 00:00";
             gameManager.TimeOut();
         }
-        else if(!timeout)
+        else if(!timeout && !gameManager.isPaused())
         {
             remainingTime -= Time.deltaTime;
             int minutes = Mathf.FloorToInt(remainingTime / 60);

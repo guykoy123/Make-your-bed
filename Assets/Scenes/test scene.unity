@@ -2357,7 +2357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff9f87b43a2c5f4ea4acb9f6c41f3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  remainingTime: 120
+  remainingTime: 40
   gameManager: {fileID: 1840854172}
 --- !u!114 &356408837
 MonoBehaviour:
