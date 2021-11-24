@@ -105,14 +105,10 @@ public class DustSpotController : MonoBehaviour
     {
         if (inCleaningMode)
         {
-            //if pressed the button exits back to the game
-            if (Input.GetButtonDown("Interact"))
-            {
-                ExitCleaningView();
-            }
             //doesn't exit back when the player finished cleaning only after he releases the mouse button (prevents unexepected jump back)
-            else if(Input.GetMouseButtonUp(0) && clean)
+            if(Input.GetMouseButtonUp(0) && clean)
             {
+                Debug.Log("dust spot clean, auto exiting dust spot");
                 ExitCleaningView();
             }
             else

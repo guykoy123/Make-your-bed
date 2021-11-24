@@ -13,6 +13,9 @@ public class PlayerAction : MonoBehaviour
 
     bool disabledAction = false;
     bool skipFrame = false;
+    bool inDustCleaningMode = false;
+    DustSpotController currentDustSpot;
+
     CharacterJoint joint;
     GameObject item;
     // Start is called before the first frame update
@@ -42,6 +45,17 @@ public class PlayerAction : MonoBehaviour
                 skipFrame = false;
             }
         }
+        else if (inDustCleaningMode)
+        {
+            if (Input.GetButtonDown("Interact"))
+            {
+                currentDustSpot.ExitCleaningView();
+                inDustCleaningMode = false;
+                currentDustSpot = null;
+                interactMessage.text = "PRESS E TO CLEAN DUST";
+                Debug.Log("player pressed e to exit dust spot");
+            }
+        }
     }
 
     public void DisableAction()
@@ -58,6 +72,7 @@ public class PlayerAction : MonoBehaviour
     }
     void CheckInteractable()
     {
+
         RaycastHit hit2;
         Physics.Raycast(playerCam.position, playerCam.TransformVector(Vector3.forward), out hit2, 3f);
         if (hit2.collider != null)
@@ -102,6 +117,8 @@ public class PlayerAction : MonoBehaviour
                     {
                         spot.EnterCleaningView();
                         interactMessage.text = "PRESS E TO EXIT BACK";
+                        inDustCleaningMode = true;
+                        currentDustSpot = spot;
                     }
                 }
             }
@@ -115,6 +132,7 @@ public class PlayerAction : MonoBehaviour
         {
             interactMessage.text="";
         }
+
     }
     void CheckMouseClick()
     {

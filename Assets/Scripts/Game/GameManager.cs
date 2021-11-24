@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public Timer gameTimer;
     public GameObject dustText;
     public GameObject playerUI;
-
+    
     public bool endless = false; //switch to endless mode for debuging
 
     ScoreCalculator scoreCalculator;
