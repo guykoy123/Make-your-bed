@@ -95,8 +95,8 @@ public class PlayerMovement : MonoBehaviour
         //rotate the player camera up and down
 
         //get mouse movement
-        float mouseX = Input.GetAxis("Mouse X") * OptionsData.mouseSensetivity *300* Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * OptionsData.mouseSensetivity*300 * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * OptionsData.mouseSensitivity *300* Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * OptionsData.mouseSensitivity*300 * Time.deltaTime;
 
         //clamp the upwards rotation
         xRotation -= mouseY;

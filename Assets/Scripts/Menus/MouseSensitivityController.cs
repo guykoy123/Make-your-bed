@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MouseSensetivityController : MonoBehaviour
+public class MouseSensitivityController : MonoBehaviour
 {
     Slider mouseSlider;
 
@@ -11,7 +11,7 @@ public class MouseSensetivityController : MonoBehaviour
     void Start()
     {
         mouseSlider = gameObject.GetComponent<Slider>();
-        mouseSlider.value = OptionsData.mouseSensetivity;
+        mouseSlider.value = OptionsData.mouseSensitivity;
     }
 
     // Update is called once per frame
@@ -21,6 +21,6 @@ public class MouseSensetivityController : MonoBehaviour
     }
     public void UpdateSensetivity(float sliderValue)
     {
-        OptionsData.mouseSensetivity = sliderValue;
+        OptionsData.mouseSensitivity = sliderValue;
     }
 }

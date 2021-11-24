@@ -155,6 +155,7 @@ public class DustSpotController : MonoBehaviour
                             gameObject.GetComponent<Renderer>().enabled = false;
                             gameObject.GetComponent<MeshCollider>().enabled = false;
                             clean = true;
+                            dustCloud.Stop();
                         }
                         else
                         {
