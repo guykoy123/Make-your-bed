@@ -12,6 +12,7 @@ TagManager:
   - Dust Spot
   - Waypoint
   - Dust Camera
+  - Terrain
   layers:
   - Default
   - TransparentFX

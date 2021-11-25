@@ -2927,6 +2927,7 @@ GameObject:
   - component: {fileID: 431575228}
   - component: {fileID: 431575232}
   - component: {fileID: 431575234}
+  - component: {fileID: 431575235}
   m_Layer: 2
   m_Name: Player
   m_TagString: Player
@@ -2986,6 +2987,7 @@ MonoBehaviour:
   gameTimer: {fileID: 356408836}
   gameManager: {fileID: 1840854172}
   playerAnimator: {fileID: 1486414434}
+  footsteps: {fileID: 431575235}
   gravity: -20
   jumpForce: 5
 --- !u!4 &431575231
@@ -3218,6 +3220,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &431575235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431575227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53384a18867b46e4c99bcaf8c0182832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &457152801
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8404,7 +8418,7 @@ GameObject:
   - component: {fileID: 1080187418}
   m_Layer: 0
   m_Name: Terrain (1)
-  m_TagString: Untagged
+  m_TagString: Terrain
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -9224,6 +9238,7 @@ GameObject:
   - component: {fileID: 1219043109}
   - component: {fileID: 1219043108}
   - component: {fileID: 1219043110}
+  - component: {fileID: 1219043111}
   m_Layer: 0
   m_Name: Sargent
   m_TagString: Untagged
@@ -9247,6 +9262,7 @@ MonoBehaviour:
   path: {fileID: 1666004969}
   animator: {fileID: 1176242987}
   gameTimer: {fileID: 356408836}
+  footSteps: {fileID: 1219043111}
   speed: 3
   minimumDistanceToWaypoint: 1
   gravity: -10
@@ -9282,6 +9298,18 @@ CapsuleCollider:
   m_Height: 1.8999891
   m_Direction: 1
   m_Center: {x: 0, y: -0.14679003, z: 0}
+--- !u!114 &1219043111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1219043107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53384a18867b46e4c99bcaf8c0182832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1219043113
 Transform:
   m_ObjectHideFlags: 0
@@ -13338,7 +13366,7 @@ MonoBehaviour:
   gameTimer: {fileID: 356408836}
   dustText: {fileID: 612397628}
   playerUI: {fileID: 2096359787}
-  endless: 1
+  endless: 0
 --- !u!1001 &1856476913
 PrefabInstance:
   m_ObjectHideFlags: 0

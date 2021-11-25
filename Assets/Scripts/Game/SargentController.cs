@@ -8,6 +8,7 @@ public class SargentController : MonoBehaviour
     public PathController path;
     public Animator animator;
     public Timer gameTimer;
+    public FootstepsController footSteps;
 
     public float speed = 5f;
     public float minimumDistanceToWaypoint = 1f;
@@ -21,6 +22,8 @@ public class SargentController : MonoBehaviour
         path.setMinDistance(minimumDistanceToWaypoint);
         controller.Move(Vector3.zero);
         animator.SetBool("Walking", true);
+        footSteps.playSound(0.5f);
+        footSteps.SetVolumeMultiplier(3);
 
     }
 
@@ -57,6 +60,7 @@ public class SargentController : MonoBehaviour
             {
                 finished = true;
                 animator.SetBool("Walking", false);
+                footSteps.stopSound();
                 animator.SetTrigger("Judge");
                 Debug.Log("reached the end");
             }

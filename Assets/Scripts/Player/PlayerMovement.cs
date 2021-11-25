@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Timer gameTimer;
     public GameManager gameManager;
     public Animator playerAnimator;
+    public FootstepsController footsteps;
 
     //Movement speeds
     float WalkSpeed = 5f;
@@ -24,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded=true;
     float xRotation = 0f;
     float currentSpeed;
+
+    float footstepsDelay = 0.4f;
+    GroundType currentGround;
 
     bool movementDisabled = false;
 
@@ -57,10 +61,25 @@ public class PlayerMovement : MonoBehaviour
             if (direction.sqrMagnitude > 0)
             {
                 playerAnimator.SetBool("Walk", true);
+                if (!footsteps.isPlaying())
+                {
+                    footsteps.playSound(footstepsDelay);
+                }
+                else if(footsteps.getCurrentDelay() != footstepsDelay)
+                {
+                    footsteps.playSound(footstepsDelay);
+                }
+                
+                
             }
             else
             {
                 playerAnimator.SetBool("Walk", false);
+                if (footsteps.isPlaying())
+                {
+                    footsteps.stopSound();
+                }
+
             }
 
             //checl jumping
@@ -120,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerAnimator.SetBool("Sprint", true);
             currentSpeed = SprintSpeed;
+            footstepsDelay = 0.3f;
         }
         else if (Input.GetButtonDown("Crouch"))
         {
@@ -128,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetBool("Crouch", true);
             controller.height = 1.6f;
             controller.center = new Vector3(0, -0.1f, 0);
+            footstepsDelay = 0.3f;
         }
         else if (Input.GetButtonDown("Prone"))
         {
@@ -136,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetBool("Prone", true);
             controller.height = 0.5f;
             controller.center = new Vector3(0, -0.6f, 1.5f);
+            footstepsDelay = 1f;
         }
 
         if (Input.GetButtonUp("Crouch"))
@@ -145,6 +167,7 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetBool("Crouch", false);
             controller.height = 1.8f;
             controller.center = new Vector3(0, 0, 0);
+            footstepsDelay = 0.4f;
         }
         else if (Input.GetButtonUp("Prone"))
         {
@@ -153,11 +176,13 @@ public class PlayerMovement : MonoBehaviour
             playerAnimator.SetBool("Prone", false);
             controller.height = 1.8f;
             controller.center = new Vector3(0, 0, 0);
+            footstepsDelay = 0.4f;
         }
        else if (Input.GetButtonUp("Sprint"))
         {
             currentSpeed = WalkSpeed;
             playerAnimator.SetBool("Sprint", false);
+            footstepsDelay = 0.4f;
         }
     }
 }
