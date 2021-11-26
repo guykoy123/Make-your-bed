@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SargentController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class SargentController : MonoBehaviour
     public Timer gameTimer;
     public FootstepsController footSteps;
     public GameManager gameManager;
+
+    AudioSource audioSource;
+    AudioClip[] screamingClips;
 
     public float speed = 5f;
     public float minimumDistanceToWaypoint = 1f;
@@ -25,6 +29,8 @@ public class SargentController : MonoBehaviour
         animator.SetBool("Walking", true);
         footSteps.playSound(0.5f);
         footSteps.SetVolumeMultiplier(3);
+
+        SetupAudioSource();
 
     }
 
@@ -64,10 +70,25 @@ public class SargentController : MonoBehaviour
                 footSteps.stopSound();
                 animator.SetTrigger("Judge");
                 Debug.Log("reached the end");
+                Debug.Log("rotation: " + transform.rotation);
+
             }
         }
+        if(!gameTimer.gotTime() && !finished)
+        {
+            transform.position = path.getEndPosition()+new Vector3(0,1f,0);
+            transform.rotation = new Quaternion(0, 0.4f, 0, 0.9f);
+            path.markFinished();
+        }
+        if (finished && !audioSource.isPlaying && animator.GetCurrentAnimatorClipInfo(0)[0].clip.name == "Armature|yell")
+        {
+            int i = Random.Range(0, screamingClips.Length);
+            audioSource.clip = screamingClips[i];
+            audioSource.Play();
 
-        
+        }
+
+
     }
     void CheckForDoor()
     {
@@ -87,5 +108,16 @@ public class SargentController : MonoBehaviour
             }
         }
 
+    }
+    void SetupAudioSource()
+    {
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 1f;
+        audioSource.volume = 0.5f;
+        AudioMixer a = Resources.Load<AudioMixer>("GameMixer");
+        audioSource.outputAudioMixerGroup = a.FindMatchingGroups("Game Sound")[0];
+
+        screamingClips = Resources.LoadAll<AudioClip>("Game Sounds/sargeant");
     }
 }

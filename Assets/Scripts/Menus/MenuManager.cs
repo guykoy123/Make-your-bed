@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject optionsMenu;
     public GameObject controlsMenu;
+    public GameObject creditsMenu;
     
     // Start is called before the first frame update
     void Start()
@@ -15,6 +16,7 @@ public class MenuManager : MonoBehaviour
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         controlsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Confined;
     }
 
@@ -46,11 +48,18 @@ public class MenuManager : MonoBehaviour
         mainMenu.SetActive(true);
         optionsMenu.SetActive(false);
         controlsMenu.SetActive(false);
+        creditsMenu.SetActive(false);
     }
 
     public void pressControls()
     {
         mainMenu.SetActive(false);
         controlsMenu.SetActive(true);
+    }
+
+    public void pressCredits()
+    {
+        mainMenu.SetActive(false);
+        creditsMenu.SetActive(true);
     }
 }

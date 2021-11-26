@@ -87,6 +87,16 @@ public class PathController : MonoBehaviour
         }
 
     }
+
+    public Vector3 getEndPosition()
+    {
+        return Waypoints[Waypoints.Count - 1].position;
+    }
+
+    public void markFinished()
+    {
+        finished = true;
+    }
 }
 
 

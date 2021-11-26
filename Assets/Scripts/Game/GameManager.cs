@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     public Timer gameTimer;
     public GameObject dustText;
     public GameObject playerUI;
-    
+    AudioSource gameMusicSource;
+
     public bool endless = false; //switch to endless mode for debuging
 
     ScoreCalculator scoreCalculator;
@@ -37,6 +38,8 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         playerUI.SetActive(true);
+
+        gameMusicSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -72,6 +75,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("ran out of time, score:" + score);
         Cursor.lockState = CursorLockMode.Confined;
         playerUI.SetActive(false);
+        gameMusicSource.Stop();
         SceneManager.LoadScene("timeout scene", LoadSceneMode.Additive);
     }
     public void pauseGame()
