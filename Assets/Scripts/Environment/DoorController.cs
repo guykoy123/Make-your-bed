@@ -15,10 +15,11 @@ public class DoorController : MonoBehaviour
     public AudioClip doorOpenClip;
     public AudioClip doorCloseClip;
 
+    AudioClip[] doorLockedClips;
+
     AudioSource doorAudio;
-    Vector3 axis = new Vector3(0, 0, 1);
     bool open = false;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +27,9 @@ public class DoorController : MonoBehaviour
         doorAudio = gameObject.GetComponent<AudioSource>();
         doorAudio.playOnAwake = false;
         doorAudio.spatialBlend = 1;
-        doorAudio.volume = 0.5f;
+        doorAudio.volume = 0.3f;
+
+        doorLockedClips = Resources.LoadAll<AudioClip>("Game Sounds/door/locked");
     }
 
     // Update is called once per frame
@@ -51,7 +54,7 @@ public class DoorController : MonoBehaviour
                 if (open)
                 {
                     //close door
-                    transform.Rotate(axis, 90f);
+                    transform.Rotate(Vector3.forward, 90f);
                     open = false;
                     doorAudio.clip = doorCloseClip;
                     doorAudio.Play();
@@ -60,11 +63,17 @@ public class DoorController : MonoBehaviour
                 {
                     //open door
                     open = true;
-                    transform.Rotate(axis, -90f);
+                    transform.Rotate(Vector3.forward, -90f);
                     doorAudio.clip = doorOpenClip;
                     doorAudio.Play();
                 }
             }
+        }
+        else if(Locked)
+        {
+            int i = Random.Range(0, doorLockedClips.Length);
+            doorAudio.clip = doorLockedClips[i];
+            doorAudio.Play();
         }
         
     }
@@ -75,7 +84,7 @@ public class DoorController : MonoBehaviour
             if (open)
             {
                 //close door
-                transform.Rotate(new Vector3(0, 0, 1), 90f);
+                transform.Rotate(Vector3.forward, 90f);
                 transform.localPosition += new Vector3(0, 0.003f, 0);
                 open = false;
                 doorAudio.clip = doorCloseClip;
@@ -85,7 +94,7 @@ public class DoorController : MonoBehaviour
             {
                 //open door
                 open = true;
-                transform.Rotate(new Vector3(0, 0, 1), -90f);
+                transform.Rotate(Vector3.forward, -90f);
                 transform.localPosition += new Vector3(0, -0.003f, 0);
                 doorAudio.clip = doorOpenClip;
                 doorAudio.Play();
@@ -96,7 +105,7 @@ public class DoorController : MonoBehaviour
             if (open)
             {
                 //close door
-                transform.Rotate(new Vector3(0, 0, 1), -90f);
+                transform.Rotate(Vector3.forward, -90f);
                 transform.localPosition += new Vector3(-0.002f, 0.005f, 0);
                 open = false;
                 doorAudio.clip = doorCloseClip;
@@ -106,7 +115,7 @@ public class DoorController : MonoBehaviour
             {
                 //open door
                 open = true;
-                transform.Rotate(new Vector3(0, 0, 1), 90f);
+                transform.Rotate(Vector3.forward, 90f);
                 transform.localPosition += new Vector3(0.002f, -0.005f, 0);
                 doorAudio.clip = doorOpenClip;
                 doorAudio.Play();

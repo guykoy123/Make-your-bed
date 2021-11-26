@@ -97,8 +97,8 @@ public class FootstepsController : MonoBehaviour
     }
     void LoadAudioClips()
     {
-        desertSteps = Resources.LoadAll<AudioClip>("footsteps/desert");
-        concreteSteps = Resources.LoadAll<AudioClip>("footsteps/concrete");
+        desertSteps = Resources.LoadAll<AudioClip>("Game Sounds/footsteps/desert");
+        concreteSteps = Resources.LoadAll<AudioClip>("Game Sounds/footsteps/concrete");
     }
     void SetupAudioSource()
     {

@@ -9,6 +9,7 @@ public class SargentController : MonoBehaviour
     public Animator animator;
     public Timer gameTimer;
     public FootstepsController footSteps;
+    public GameManager gameManager;
 
     public float speed = 5f;
     public float minimumDistanceToWaypoint = 1f;
@@ -32,7 +33,7 @@ public class SargentController : MonoBehaviour
     {
         if (gameTimer.getRemainingTime() < 32)
         {
-            if (!path.isFinished())
+            if (!path.isFinished() && !gameManager.isPaused())
             {
                 //check if a door is ahead and open it
                 CheckForDoor();
@@ -56,7 +57,7 @@ public class SargentController : MonoBehaviour
                 movement.y = downVelocity;
                 controller.Move(movement);
             }
-            else if (!finished)
+            else if (!finished && !gameManager.isPaused())
             {
                 finished = true;
                 animator.SetBool("Walking", false);

@@ -362,10 +362,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MASTER VOLUME
+  m_text: GAME AUDIO
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 81ec378807e875141ad11dcd4c49b2b4, type: 2}
+  m_sharedMaterial: {fileID: 9069802146503008594, guid: 81ec378807e875141ad11dcd4c49b2b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -389,13 +389,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 35.65
-  m_fontSizeBase: 50
+  m_fontSize: 35
+  m_fontSizeBase: 35
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -525,7 +525,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 260347837110326164}
         m_TargetAssemblyTypeName: VolumeSliderController, Assembly-CSharp
-        m_MethodName: updateMasterVolume
+        m_MethodName: updateGameSoundVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -547,3 +547,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab8c5f607e38238469c53b7613491c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sliderType: 2
+  mixer: {fileID: 24100000, guid: d22c0c9c590f5a24f8ec37143520676a, type: 2}
